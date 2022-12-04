@@ -58,7 +58,7 @@ def _point_per_match(opponent_shape: str, your_shape: str) -> int:
     shape_points = SHAPE_SCORES[your_shape]
     return sum([result_points, shape_points])
 
-def _decode_shape(your_code: str, opp_shape: str):
+def _decode_shape(your_code: str, opp_shape: str) -> str:
     match_result = ELF_CODE[your_code]
     if match_result == 'draw':
         your_shape = NORMALIZED_SHAPES[opp_shape]

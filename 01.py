@@ -27,7 +27,7 @@ def _prep_data(input: List[str]) -> List[List[int]]:
     for line in input:
         if line == '':
             output.append(current_elf)
-            current_elf: List[int] = []
+            current_elf = []
         else:
             current_elf.append(int(line))
     return output 
