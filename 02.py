@@ -28,6 +28,12 @@ OUTCOME_POINTS = {
 }
 
 OUTCOMES = {
+    'A': {'Y': 'win', 'Z': 'loss'},
+    'B': {'Z': 'win', 'X': 'loss'},
+    'C': {'X': 'win', 'Y': 'loss'}
+}
+
+REVERSE_OUTCOMES = {
     'A': {'win': 'Y', 'loss': 'Z'},
     'B': {'win': 'Z', 'loss': 'X'},
     'C': {'win': 'X', 'loss': 'Y'}
@@ -40,28 +46,11 @@ ELF_CODE = {
 }
 
 def _determine_outcome(opponent_shape: str, your_shape: str) -> str:
-    opponent_shape = NORMALIZED_SHAPES[opponent_shape]
     outcome: str
-    if opponent_shape == your_shape:
+    if NORMALIZED_SHAPES[opponent_shape] == your_shape:
         outcome = 'draw'
     else:
-        if opponent_shape == 'X':
-            if your_shape == 'Y':
-                outcome =  'win'
-            else:
-                outcome =  'loss'
-        
-        if opponent_shape == 'Y':
-            if your_shape == 'Z':
-                outcome =  'win'
-            else:
-                outcome = 'loss'
-        
-        if opponent_shape == 'Z':
-            if your_shape == 'X':
-                outcome = 'win'
-            else:
-                outcome = 'loss'
+        outcome = OUTCOMES[opponent_shape][your_shape]
     return outcome
 
 def _point_per_match(opponent_shape: str, your_shape: str) -> int:
@@ -74,7 +63,7 @@ def _decode_shape(your_code: str, opp_shape: str):
     if match_result == 'draw':
         your_shape = NORMALIZED_SHAPES[opp_shape]
     else:
-        your_shape = OUTCOMES[opp_shape][match_result]
+        your_shape = REVERSE_OUTCOMES[opp_shape][match_result]
     return your_shape
 
 def get_total_points(input: List[str]) -> int:
