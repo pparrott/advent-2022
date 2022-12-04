@@ -1,3 +1,5 @@
+from pathlib import Path
+from resources.parsers import read_data_input, read_test_data_input
 from typing import List
 
 test_input = """1000
@@ -16,10 +18,8 @@ test_input = """1000
 10000
 """
 
-test_data = test_input.split('\n')
-
-with open('./data/01.txt') as f:
-    data = [line.strip() for line in f]
+test_data = read_test_data_input(test_input)
+data = read_data_input(Path('./data/01.txt'))
 
 def _prep_data(input: List[str]) -> List[List[int]]:
     output: List[List[int]] = []
